@@ -11,7 +11,7 @@ import { LOADING_STATUS } from '../../../store/constants';
 
 function MainPage() {
     const match = useMediaQuery('(min-width:800px)');
-    const dispatch: any = useDispatch();
+    const dispatch = useDispatch();
 
     const { loadingStatus } = useSelector(authSelector);
 

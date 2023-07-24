@@ -9,7 +9,7 @@ import { Box, CircularProgress, Pagination, Typography } from "@mui/material";
 import { setItemsPage } from "../../store/actions/items";
 
 const CardList: FC = () => {
-    const dispatch: any = useDispatch();
+    const dispatch = useDispatch();
     const {
         items,
         page,

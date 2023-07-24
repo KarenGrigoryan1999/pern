@@ -18,7 +18,7 @@ const validationSchema = yup.object({
 });
 
 const AuthForm = () => {
-    const dispatch: any = useDispatch();
+    const dispatch = useDispatch();
     const { loadingStatus } = useSelector(authSelector);
 
     const formik = useFormik({
