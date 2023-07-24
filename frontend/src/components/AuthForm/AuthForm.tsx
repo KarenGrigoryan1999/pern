@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { Button, TextField, Card, Box, CircularProgress, Typography } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../helpers/hooks';
 import { userAuth } from '../../store/thunks/auth';
 import { authSelector } from '../../store/selectors/auth';
 import { LOADING_STATUS } from '../../store/constants';
@@ -18,8 +18,8 @@ const validationSchema = yup.object({
 });
 
 const AuthForm = () => {
-    const dispatch = useDispatch();
-    const { loadingStatus } = useSelector(authSelector);
+    const dispatch = useAppDispatch();
+    const { loadingStatus } = useAppSelector(authSelector);
 
     const formik = useFormik({
         initialValues: {

@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { Button, TextField, Card, Select, MenuItem } from '@mui/material';
+import { useAppDispatch } from '../../helpers/hooks';
 import { ITEM_PRIORITY } from './types';
 import { createItem } from '../../store/thunks/items';
 
@@ -20,7 +20,7 @@ const validationSchema = yup.object({
 });
 
 const CreateItemForm = () => {
-    const dispatch: any = useDispatch();
+    const dispatch = useAppDispatch();
 
     const formik = useFormik({
         initialValues: {

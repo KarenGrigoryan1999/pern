@@ -1,7 +1,7 @@
 import { AUTH_LOADING_STATUS } from "../../types/auth"
 import { defaultState } from "./initialState"
 
-export function authReducer(state = defaultState, action: any) {
+export function authReducer(state = defaultState, action: AuthAction) {
     switch (action.type) {
         case AUTH_LOADING_STATUS:
             return {
@@ -12,3 +12,10 @@ export function authReducer(state = defaultState, action: any) {
             return state
     }
 }
+
+interface AuthLoadingStatus {
+    type: typeof AUTH_LOADING_STATUS;
+    payload: string
+}
+
+type AuthAction = AuthLoadingStatus;

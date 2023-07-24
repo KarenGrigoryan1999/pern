@@ -18,11 +18,13 @@ describe("Тестирование сервиса NoteService", () => {
     jest.spyOn(Note, 'count').mockResolvedValue(1);
     service = new NoteService(Note);
   });
+  
   it("Возврат массива заметок", async () => {
     const res = await service.getAll();
     expect(Note.findAll).toBeCalledTimes(1);
     expect(res).toEqual([testEntity]);
   });
+
   it("Возврат заметок по страницам", async () => {
     const pagedNotes = await service.getAllByPage(1, 10);
     expect(pagedNotes).toBeInstanceOf(Array);

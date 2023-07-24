@@ -1,22 +1,22 @@
 import { FC, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Box, CircularProgress, Pagination, Typography } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../helpers/hooks";
 import CardElement from "../CardElement/CardElement";
 import { itemsSelector } from "../../store/selectors/items";
 import { getPaginatedItems, removeItem } from "../../store/thunks/items";
 import { IRequestItem } from "../../store/reducers/items/types";
 import { LOADING_STATUS } from "../../store/constants";
-import { Box, CircularProgress, Pagination, Typography } from "@mui/material";
 import { setItemsPage } from "../../store/actions/items";
 
 const CardList: FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const {
         items,
         page,
         limit,
         count,
         loadingStatus
-    } = useSelector(itemsSelector);
+    } = useAppSelector(itemsSelector);
 
     const pageCount = Math.ceil(count/limit);
 

@@ -14,6 +14,7 @@ describe('Авторизация пользователя', () => {
     let succesfullyAns;
     let rejectAns;
     let store: MockStoreEnhanced<AppState, ThunkDispatch<AppState, any, any>>;
+    
     beforeAll(() => {
         store = mockStore({});
         testUser = {
@@ -25,9 +26,13 @@ describe('Авторизация пользователя', () => {
             password: '11111111',
             token: 'user-token',
         };
-        rejectAns = { status: 401 };
+        rejectAns = {
+            status: 401,
+            response: 'Unauthorized',
+        };
         global.localStorage = mockLocalStorage;
-    })
+    });
+
     test('Удачный вход пользователя', async () => {
         jest.spyOn(api, 'post').mockResolvedValue({ data: [succesfullyAns] });
         await store.dispatch(userAuth(testUser));
@@ -36,6 +41,7 @@ describe('Авторизация пользователя', () => {
         expect(actions[0]).toEqual({ type: "AUTH_LOADING_STATUS", payload: "loading" });
         expect(actions[1]).toEqual({ type: "AUTH_LOADING_STATUS", payload: "success" });
     });
+
     test('Неудачный вход пользователя', async () => {
         jest.spyOn(api, 'post').mockRejectedValue(rejectAns);
         await store.dispatch(userAuth(testUser));

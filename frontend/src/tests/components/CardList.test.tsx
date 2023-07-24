@@ -1,18 +1,20 @@
+import React from 'react'
 import { Provider } from 'react-redux';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import { render, screen } from '@testing-library/react';
-import configureMockStore, { MockStoreEnhanced } from 'redux-mock-store';
+import configureMockStore from 'redux-mock-store';
 import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom';
-
-import React from 'react'
 import CardList from '../../components/CardList/CardList';
 import { LOADING_STATUS } from '../../store/constants';
-global.React = React
 
 describe('Компонент списка заметок', () => {
     const middlewares = [thunk];
     const mockStore = configureMockStore<AppState, ThunkDispatch<AppState, any, any>>(middlewares);
+
+    beforeAll(() => {
+        global.React = React;
+    });
 
     test('Загрузка заметок из стора', async () => {
         let testStore = mockStore({
@@ -29,6 +31,7 @@ describe('Компонент списка заметок', () => {
         const notesLoadedText = await screen.findByText(/Все заметки загружены!/i);
         expect(notesLoadedText).toBeInTheDocument();
     });
+    
     test('Неудачная загрузка заметок из стора', async () => {
         let testStore = mockStore({
             itemsReducer: {

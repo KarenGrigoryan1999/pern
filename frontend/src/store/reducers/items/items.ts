@@ -1,7 +1,9 @@
+import { LOADING_STATUS } from "../../constants"
 import { ITEMS_LOADING_STATUS, SET_ALL_ITEMS, SET_PAGE_NUMBER } from "../../types/items"
 import { defaultState } from "./initialState"
+import { IRequestItem } from "./types"
 
-export function itemsReducer(state = defaultState, action: any) {
+export function itemsReducer(state = defaultState, action: ItemsAction) {
     switch (action.type) {
       case SET_ALL_ITEMS:
         return {
@@ -23,3 +25,20 @@ export function itemsReducer(state = defaultState, action: any) {
         return state
     }
   }
+
+interface setAllStatusAction {
+    type: typeof SET_ALL_ITEMS;
+    payload: IRequestItem[]
+}
+
+interface itemsLoadingStatusAction {
+  type: typeof ITEMS_LOADING_STATUS;
+  payload: LOADING_STATUS
+}
+
+interface setPageNumberAction {
+  type: typeof SET_PAGE_NUMBER;
+  payload: number
+}
+
+type ItemsAction = setAllStatusAction | itemsLoadingStatusAction | setPageNumberAction;
