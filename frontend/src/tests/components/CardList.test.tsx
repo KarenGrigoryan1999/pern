@@ -1,30 +1,47 @@
 import { Provider } from 'react-redux';
+import thunk, { ThunkDispatch } from 'redux-thunk';
 import { render, screen } from '@testing-library/react';
+import configureMockStore, { MockStoreEnhanced } from 'redux-mock-store';
 import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom';
 
 import React from 'react'
 import CardList from '../../components/CardList/CardList';
-import store from '../../store';
+import { LOADING_STATUS } from '../../store/constants';
 global.React = React
 
 describe('Компонент списка заметок', () => {
-    test('Проверка прогрессбара в момент загрузки', () => {
+    const middlewares = [thunk];
+    const mockStore = configureMockStore<AppState, ThunkDispatch<AppState, any, any>>(middlewares);
+
+    test('Загрузка заметок из стора', async () => {
+        let testStore = mockStore({
+            itemsReducer: {
+                items: [],
+                loadingStatus: LOADING_STATUS.SUCCESS
+            }
+        });
         render(
-            <Provider store={store}>
+            <Provider store={testStore}>
                 <CardList />
             </Provider>
         );
-        const loader = screen.getByRole('progressbar');
-        expect(loader).toBeInTheDocument();
+        const notesLoadedText = await screen.findByText(/Все заметки загружены!/i);
+        expect(notesLoadedText).toBeInTheDocument();
     });
-    test('Проверка заметок после полной прогрузки', async () => {
+    test('Неудачная загрузка заметок из стора', async () => {
+        let testStore = mockStore({
+            itemsReducer: {
+                items: null,
+                loadingStatus: LOADING_STATUS.ERROR
+            }
+        });
         render(
-            <Provider store={store}>
+            <Provider store={testStore}>
                 <CardList />
             </Provider>
         );
-        const loader = await screen.findByText(/Все заметки загружены!/i);
+        const loader = await screen.findByRole(/progressbar/i);
         expect(loader).toBeInTheDocument();
     });
 })
