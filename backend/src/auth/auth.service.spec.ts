@@ -4,7 +4,7 @@ import { AuthService } from "./auth.service";
 import { User } from "../user/entities/user.entity";
 import { RoleModule } from 'src/role/role.module';
 
-describe("Тестирование сервиса NoteService", () => {
+describe("Тестирование сервиса AuthService", () => {
   let service: AuthService;
   let tokenService;
   let testEntity;
