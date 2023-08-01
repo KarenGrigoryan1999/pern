@@ -7,7 +7,7 @@ import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom';
 import CreateNoteForm from '../../components/CreateNoteForm/CreateNoteForm';
 
-describe('Форма добавления записки', () => {
+describe('Тестирование компонента формы добавления записки', () => {
     const middlewares = [thunk];
     const mockStore = configureMockStore<AppState, ThunkDispatch<AppState, any, any>>(middlewares);
 
@@ -18,7 +18,7 @@ describe('Форма добавления записки', () => {
         global.React = React;
     });
 
-    test('Ввод заголовка менее пяти символов, а также ввод пустого текста в текстовую часть', async () => {
+    test('Ввод заголовка менее пяти символов, а также ввод пустого текста в текстовую часть. Ожидается ошибка валидации', async () => {
         let { container } = render(
             <Provider store={testStore}>
                 <CreateNoteForm />
@@ -41,7 +41,7 @@ describe('Форма добавления записки', () => {
         expect(helperTitleText).toBeInTheDocument();
     });
 
-    test('Ввод заголовка более пяти символов, а также ввод непустого текста в текстовую часть', async () => {
+    test('Ввод заголовка более пяти символов, а также ввод непустого текста в текстовую часть.  Ожидается отсутствие ошибки валидации', async () => {
         let { container } = render(
             <Provider store={testStore}>
                 <CreateNoteForm />

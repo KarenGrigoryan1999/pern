@@ -50,7 +50,7 @@ describe("Тестирование сервиса NoteService", () => {
     service = module.get<AuthService>(AuthService);
   });
 
-  it("Метод генерации токена", async () => {
+  it("Метод генерации токена. Ожидается что результат генерации токена методом будет соответствовать верному результату", async () => {
     const generatedToken = await service.generateToken(testEntity);
     const decodedPayload = tokenService.verify(generatedToken.token);
     

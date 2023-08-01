@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import { usePagination } from '../../helpers/hooks';
 
 describe('Тест хука usePagination для управления перелистывания страниц', () => {
-    test('Установка конкретной страницы с помощью setPage', () => {
+    test('Установка конкретной страницы с помощью setPage. Ожидается изменение страницы', () => {
         const {result} = renderHook(() => usePagination({
                 contentPerPage: 10,
                 count: 100,
@@ -13,7 +13,7 @@ describe('Тест хука usePagination для управления перел
         expect(result.current.lastContentIndex).toBe(40);
     });
 
-    test('Установка несуществующей страницы с помощью setPage', () => {
+    test('Установка несуществующей страницы с помощью setPage. Ожидается что произойдет переход на максимально доступную страницу', () => {
         const {result} = renderHook(() => usePagination({
                 contentPerPage: 10,
                 count: 100,
@@ -33,7 +33,7 @@ describe('Тест хука usePagination для управления перел
         expect(result.current.page).toBe(2);
     });
 
-    test('Перелистывание на страницу вперед, находясь на последней странице при помощи nextPage', () => {
+    test('Перелистывание на страницу вперед, находясь на последней странице при помощи nextPage․ Ожидается что хук останется на последней странице', () => {
         const {result} = renderHook(() => usePagination({
                 contentPerPage: 10,
                 count: 100,
@@ -54,7 +54,7 @@ describe('Тест хука usePagination для управления перел
         expect(result.current.page).toBe(1);
     });
 
-    test('Перелистывание на страницу назад, находясь на первой странице при помощи prevPage', () => {
+    test('Перелистывание на страницу назад, находясь на первой странице при помощи prevPage.  Ожидается что хук останется на первой странице', () => {
         const {result} = renderHook(() => usePagination({
                 contentPerPage: 10,
                 count: 100,

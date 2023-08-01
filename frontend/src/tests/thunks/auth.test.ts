@@ -7,7 +7,7 @@ import api from '../../api';
 
 interface AppState { }
 
-describe('Отправка запросов на авторизацию пользователя', () => {
+describe('Тестирование thunk для отправки запросов на авторизацию пользователя', () => {
     const middlewares = [thunk];
     const mockStore = configureMockStore<AppState, ThunkDispatch<AppState, any, any>>(middlewares);
     let testUser: IAuth;
@@ -33,7 +33,7 @@ describe('Отправка запросов на авторизацию поль
         global.localStorage = mockLocalStorage;
     });
 
-    test('Запрос с верными логином и паролем', async () => {
+    test('Запрос с верными логином и паролем должен завершиться удачно', async () => {
         jest.spyOn(api, 'post').mockResolvedValue({ data: [succesfullyAns] });
         await store.dispatch(userAuth(testUser));
         const actions = store.getActions();
@@ -42,7 +42,7 @@ describe('Отправка запросов на авторизацию поль
         expect(actions[1]).toEqual({ type: "AUTH_LOADING_STATUS", payload: "success" });
     });
 
-    test('Запрос с неверным логином или паролем', async () => {
+    test('Запрос с неверным логином или паролем должен завершиться с ошибкой', async () => {
         jest.spyOn(api, 'post').mockRejectedValue(rejectAns);
         await store.dispatch(userAuth(testUser));
         const actions = store.getActions();

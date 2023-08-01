@@ -6,7 +6,7 @@ import api from '../../api';
 import { ITEM_PRIORITY } from '../../components/CreateNoteForm/types';
 
 
-describe('Запросы на получение заметок пользователя', () => {
+describe('Тестирование Thunk для запросов на получение заметок пользователя', () => {
     const middlewares = [thunk];
 
     interface AppState { }
@@ -28,7 +28,7 @@ describe('Запросы на получение заметок пользова
         global.localStorage = mockLocalStorage;
     });
 
-    test('Получение первых десяти заметок', async () => {
+    test('Получение первых десяти заметок должно вернуть массив из 10 заметок и количество заметок в БД всего', async () => {
         jest.spyOn(api, 'post').mockResolvedValue({ data: [succesfullyAns] });
 
         await store.dispatch(getPaginatedNotes(1, 10));
@@ -39,14 +39,14 @@ describe('Запросы на получение заметок пользова
         expect(actions[2]).toEqual({ type: "notes_LOADING_STATUS", payload: "success" });
     });
     
-    test('Неудачное получение записи с первой страницы', async () => {
+    test('Неудачное получение записи с первой страницы должно вернуть ошибку', async () => {
         jest.spyOn(api, 'post').mockRejectedValue(rejectAns);
 
         await store.dispatch(getPaginatedNotes(1, 10));
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual({ type: "notes_LOADING_STATUS", payload: "loading" });
+        expect(actions[0]).toEqual({ type: "NOTES_LOADING_STATUS", payload: "loading" });
         expect((actions[1]).type).toBe("SET_ALL_notes");
-        expect(actions[2]).toEqual({ type: "notes_LOADING_STATUS", payload: "error" });
+        expect(actions[2]).toEqual({ type: "NOTES_LOADING_STATUS", payload: "error" });
     });
 });
