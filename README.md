@@ -4,7 +4,20 @@
 
 # Установка
 1. Склонируйте проект при помощи git clone https://github.com/KarenGrigoryan1999/pern.git
-2. Перейдите в корневую директорию проекта и введите команду npm i в директории backend и frontend
+2. Установите пакеты для frontend и backend:
+```
+cd backend
+npm i
+cd ../frontend
+npm i
+```
+3. Настройка переменных окружения։
+
+```
+cp .env.example .env.development
+cd ../backend
+cp .example.env .development.env
+```
 
 # Запуск в dev режиме
 1. Введите команду npm run start:dev в директории backend
