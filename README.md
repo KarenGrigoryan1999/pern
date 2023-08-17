@@ -20,11 +20,28 @@ cp .example.env .development.env
 ```
 
 # Запуск в dev режиме
-1. Введите команду npm run start:dev в директории backend
-2. Введите команду npm run dev для старта фронтенда в dev режиме в директории frontend
+1. Введите команду npm run start:dev в директории backend:
+   ```
+   npm run start:dev
+   ```
+3. Введите команду npm run dev для старта фронтенда в dev режиме в директории frontend:
+   ```
+   npm run dev
+   ```
 
 # Запуск в prod режиме
-1. Введите команду npm run build в директории backend
-2. Введите команду npm run build для сборки проекта в директории frontend
-3. Используйте npm run start для старта собранного проекта в директории backend
-4. Используйте веб сервер (например nginx) для раздачи собранной статики из директории frontend
+1. Введите команду npm run build в директории backend:
+   ```
+   npm run build
+   ```
+3. Введите команду npm run build для сборки проекта в директории frontend:
+   ```
+   cd ../frontend
+   npm run build
+   ```
+5. Используйте npm run start для старта собранного проекта в директории backend:
+   ```
+   cd ../backend
+   npm run start
+   ```
+7. Используйте веб сервер (например nginx) для раздачи собранной статики из директории frontend
