@@ -8,5 +8,4 @@ export const notesPagesSelector = (state: IState) => state.notesReducer.page;
 
 export const notesSelector = (state: IState) => state.notesReducer.notes;
 
-export const notesLoadingStatus = (state: IState) =>
-  state.notesReducer.loadingStatus;
+export const notesLoadingStatus = (state: IState) => state.notesReducer.loadingStatus;

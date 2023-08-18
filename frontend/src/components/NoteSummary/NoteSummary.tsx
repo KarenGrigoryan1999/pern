@@ -1,5 +1,11 @@
 import { FC, memo } from 'react';
-import { Box, Button, Card, Chip, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  Chip,
+  Typography
+} from '@mui/material';
 
 import { INoteWithId } from '../../store/types';
 

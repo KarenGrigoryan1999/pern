@@ -6,8 +6,7 @@ import { IState } from '..';
 import { saveNotes, setNotesStatus } from '../actions/notes';
 import { INote, LOADING_STATUS } from '../types';
 
-export const getPaginatedNotes =
-  (
+export const getPaginatedNotes = (
     page: number,
     limit: number,
   ): ThunkAction<void, IState, unknown, AnyAction> =>
@@ -18,8 +17,7 @@ export const getPaginatedNotes =
     dispatch(setNotesStatus(LOADING_STATUS.SUCCESS));
   };
 
-export const createNote =
-  (note: INote): ThunkAction<void, IState, unknown, AnyAction> =>
+export const createNote = (note: INote): ThunkAction<void, IState, unknown, AnyAction> =>
   async (dispatch, getState) => {
     try {
       dispatch(setNotesStatus(LOADING_STATUS.LOADING));
@@ -32,8 +30,7 @@ export const createNote =
     }
   };
 
-export const removeNote =
-  (noteId: number): ThunkAction<void, IState, unknown, AnyAction> =>
+export const removeNote = (noteId: number): ThunkAction<void, IState, unknown, AnyAction> =>
   async (dispatch, getState) => {
     try {
       dispatch(setNotesStatus(LOADING_STATUS.LOADING));

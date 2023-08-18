@@ -10,18 +10,18 @@ import { Note } from './entities/note.entity';
 export class NotesService {
   constructor(@InjectModel(Note) private noteRepository: typeof Note) {}
   async create(noteDto: NoteDto, userId: string) {
-    return await this.noteRepository.create({
+    return this.noteRepository.create({
       ...noteDto,
       userId,
     });
   }
 
   async getAll() {
-    return await this.noteRepository.findAll();
+    return this.noteRepository.findAll();
   }
 
   async getOne(noteId: string) {
-    return await this.noteRepository.findByPk(noteId);
+    return this.noteRepository.findByPk(noteId);
   }
 
   async getAllByPage(page: number, limit: number): Promise<[Note[], number]> {
@@ -37,7 +37,7 @@ export class NotesService {
   async delete(noteId: string) {
     const user = await this.noteRepository.findByPk(noteId);
 
-    if (user !== null) {
+    if (user != null) {
       await user.destroy();
       return {
         success: true,

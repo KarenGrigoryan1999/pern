@@ -17,8 +17,8 @@ function MainPage() {
 
   useEffect(() => {
     if (
-      loadingStatus === LOADING_STATUS.ERROR ||
-      loadingStatus === LOADING_STATUS.FAIL
+      loadingStatus === LOADING_STATUS.ERROR
+      || loadingStatus === LOADING_STATUS.FAIL
     ) {
       navigate('/auth');
     }

@@ -1,6 +1,12 @@
 import { useMemo } from 'react';
 import { Form, FormikProvider, useFormik } from 'formik';
-import { Button, TextField, Card, Select, MenuItem } from '@mui/material';
+import {
+  Button,
+  TextField,
+  Card,
+  Select,
+  MenuItem
+} from '@mui/material';
 
 import { useAppDispatch } from '../../hooks';
 import { createNote } from '../../store/thunks/notes';

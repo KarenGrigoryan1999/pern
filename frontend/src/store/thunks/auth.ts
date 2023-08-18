@@ -6,8 +6,7 @@ import { IState } from '../../store';
 import { setAuthStatus } from '../actions/auth';
 import { LOADING_STATUS, IAuth } from '../types';
 
-export const userAuth =
-  (authData: IAuth): ThunkAction<void, IState, unknown, AnyAction> =>
+export const userAuth = (authData: IAuth): ThunkAction<void, IState, unknown, AnyAction> =>
   async (dispatch) => {
     try {
       dispatch(setAuthStatus(LOADING_STATUS.LOADING));
@@ -19,8 +18,7 @@ export const userAuth =
     }
   };
 
-export const whoAmI =
-  (): ThunkAction<void, IState, unknown, AnyAction> => async (dispatch) => {
+export const whoAmI = (): ThunkAction<void, IState, unknown, AnyAction> => async (dispatch) => {
     try {
       dispatch(setAuthStatus(LOADING_STATUS.LOADING));
       const authUser = await api.get('auth/whoami');

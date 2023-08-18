@@ -1,11 +1,9 @@
-import { Test, TestingModule, JwtService } from '@nestjs/testing';
-import { JwtModule } from '@nestjs/jwt';
-
-import { User } from '../user/entities/user.entity';
-import { RoleModule } from '../role/role.module';
+import { Test, TestingModule } from '@nestjs/testing';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 
 import { AuthService } from './auth.service';
-
+import { User } from '../users/entities/user.entity';
+import { RolesModule } from '../roles/roles.module';
 describe('Тестирование сервиса NoteService', () => {
   let service: AuthService;
   let tokenService;
@@ -41,14 +39,8 @@ describe('Тестирование сервиса NoteService', () => {
           provide: 'User',
           useValue: User,
         },
-        JwtModule.register({
-          secret: 'SECRET',
-          signOptions: {
-            expiresIn: '24h',
-          },
-        }),
       ],
-      imports: [RoleModule],
+      imports: [RolesModule],
     }).compile();
 
     service = module.get<AuthService>(AuthService);

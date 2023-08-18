@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
+import { useAppDispatch } from './hooks';
 import MainPage from './pages/MainPage/MainPage';
 import { whoAmI } from './store/thunks/auth';
 import AuthPage from './pages/AuthPage/AuthPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(whoAmI());

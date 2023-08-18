@@ -32,7 +32,10 @@ export class AuthService {
       );
     }
 
-    const hashPassword = await bcrypt.hash(userDto.password, this.configService.getHashSalt());
+    const hashPassword = await bcrypt.hash(
+      userDto.password,
+      this.configService.getHashSalt(),
+    );
     const activationCode = uuid.v4();
     const user = await this.usersService.createUser(
       {
@@ -49,7 +52,7 @@ export class AuthService {
     const payload = {
       email: user.email,
       id: user.id,
-      roles: user.roles
+      roles: user.roles,
     };
     return {
       roles: user.roles,
@@ -59,7 +62,7 @@ export class AuthService {
 
   private async validateUser(userDto: LoginUserDto) {
     const user = await this.usersService.getUserByEmail(userDto.email);
-    if (user !== null) {
+    if (user != null) {
       const arePasswordsEquals = await bcrypt.compare(
         userDto.password,
         user.password,

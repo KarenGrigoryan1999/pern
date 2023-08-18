@@ -35,4 +35,4 @@ import { ConfigService } from './config/config.service';
     NotesModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
