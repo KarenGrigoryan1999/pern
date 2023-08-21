@@ -44,7 +44,7 @@ export class UsersService {
     };
   }
 
-  async getUserByEmail(email: string) {
+  getUserByEmail(email: string) {
     return this.userRepository.findOne({
       where: { email },
       include: { all: true },
