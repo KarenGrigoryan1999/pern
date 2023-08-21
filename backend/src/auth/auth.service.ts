@@ -47,8 +47,8 @@ export class AuthService {
 
     return this.generateToken(user);
   }
-
-  async generateToken(user: User) {
+  
+  generateToken(user: User) {
     const payload = {
       email: user.email,
       id: user.id,
