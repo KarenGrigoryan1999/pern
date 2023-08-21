@@ -9,18 +9,18 @@ import { Note } from './entities/note.entity';
 @Injectable()
 export class NotesService {
   constructor(@InjectModel(Note) private noteRepository: typeof Note) {}
-  async create(noteDto: NoteDto, userId: string) {
+  create(noteDto: NoteDto, userId: string) {
     return this.noteRepository.create({
       ...noteDto,
       userId,
     });
   }
 
-  async getAll() {
+  getAll() {
     return this.noteRepository.findAll();
   }
 
-  async getOne(noteId: string) {
+  getOne(noteId: string) {
     return this.noteRepository.findByPk(noteId);
   }
 
