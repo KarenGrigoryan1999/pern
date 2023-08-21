@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
       const authHeader = req.headers.authorization;
       const [bearer, token] = authHeader.split(' ');
 
-      if (bearer !== 'Bearer' || token === undefined) {
+      if (bearer !== 'Bearer' || token == undefined) {
         throw new UnauthorizedException({
           message: 'Пользователь не авторизован',
         });
